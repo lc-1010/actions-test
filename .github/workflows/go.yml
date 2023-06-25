@@ -28,12 +28,6 @@ jobs:
       - name: Install MySQL driver
         run: go get github.com/go-sql-driver/mysql
 
-      - name: Build
-        run: go build -v ./...
-
-      - name: Test
-        run: go test -v ./...
-
       - name: Deploy
         env:
           DB_HOST: ${{ env.DB_HOST }}
@@ -41,5 +35,12 @@ jobs:
           DB_USER: ${{ env.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_NAME: ${{ env.DB_NAME }}
-        run: |
-          go run deploy.go
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Test
+        run: go test -v ./...
+
+      
+        
