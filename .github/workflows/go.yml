@@ -11,6 +11,8 @@ env:
   DB_PORT: 3306
   DB_USER: root
   DB_NAME: actions
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          
 
 jobs:
   build:
@@ -24,17 +26,6 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.17
-
-      - name: Install MySQL driver
-        run: go get github.com/go-sql-driver/mysql
-
-      - name: Deploy
-        env:
-          DB_HOST: ${{ env.DB_HOST }}
-          DB_PORT: ${{ env.DB_PORT }}
-          DB_USER: ${{ env.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: ${{ env.DB_NAME }}
 
       - name: Build
         run: go build -v ./...
